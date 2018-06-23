@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+<style>
+#formulario{
+                width: 400px; 
+                height: 150px; 
+                left: 50%; 
+                margin: -130px 0 0 -210px; 
+                padding:10px;
+                position: absolute; 
+                top: 50%;
+                }
+</style>
+</h:head> 
+<h:body>
+<div id="formulario">
+	<h:form>
+		<h:panelGrid id="dados" columns="2">
+			<h:outputText id="usuarioLabel" value="Usuario:"/>
+			<h:inputText id="usuarioValue" label="Nome" value="#{usuarioMB.usuario}" required="true" requiredMessage="Campo Usuario está vazio"  />
+ 		<h:outputText id="senhaLabel" value="Senha:"/>
+			<h:inputSecret id="senhaValue" label="Senha"  value="#{usuarioMB.senha}" required="true" requiredMessage="Campo Senha está vazio"/>
+			<h:commandButton value="Login" action="#{usuarioMB.verificarLogin}"/>
+		</h:panelGrid>
+	</h:form>
+</div>
+<h:messages
+    errorClass="danger"
+    infoClass="info"
+    warnClass="warn">
+</h:messages>
+
+</h:body>
+</html>
