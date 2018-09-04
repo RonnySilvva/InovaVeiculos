@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+<h:head>
+<script>
+#menubar{
+	padding: 2px 10px;
+	display: inline-block;
+	}
+</script>
+</h:head> 
+<h:body>
+
+<div id="menubar">
+	<h:form>
+		<p:commandButton value="Inicio" action="/inicio.xhtml?faces-redirect=true" />
+		<p:commandButton value="Pesquisar" action="/PaginaPesquisar.xhtml?faces-redirect=true" />
+		<p:commandButton value="Adicionar" action="/PaginaAdicionar.xhtml?faces-redirect=true"/>
+	</h:form>
+</div>
+<br/>
+<br/>
+</h:body> 
+</html>

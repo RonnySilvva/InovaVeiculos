@@ -24,7 +24,8 @@
         <property name="hbm2ddl.auto">update</property>
 
         <!-- Names the annotated entity class -->
-		<mapping class="br.com.bean.UsuarioBean"/>
+		<mapping class="br.com.model.Usuario"/>
+		<mapping class="br.com.model.Carro"/>
 
     </session-factory>
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head><style>
+body{
+background: #e8e8e8;
+}
+</style></h:head> 
+<body> 
+ <ui:include src="menu.xhtml" />
+
+	<h:form>
+	<p:growl id="growl" showDetail="true" sticky="true" />
+
+		<p:outputLabel>Marca:</p:outputLabel>
+		<p:inputText label="Marca" value="#{CarroMB.carro.marca}"/><br/>
+		<p:outputLabel>Modelo:</p:outputLabel><p:inputText label="Modelo" value="#{CarroMB.carro.modelo}"/><br/>
+		<p:outputLabel>Cor:</p:outputLabel><p:inputText label="Cor" value="#{CarroMB.carro.cor}"/><br/>
+		<p:outputLabel>Ano:</p:outputLabel><p:inputText label="Ano" value="#{CarroMB.carro.ano}"/><br/>
+		<p:outputLabel>Valor:</p:outputLabel><p:inputText label="Valor" value="#{CarroMB.carro.valor}"/><br/>
+			<p:commandButton value="Adicionar" action="#{CarroMB.adicionar()}" update="growl"/>
+	</h:form>
+	
+
+
+</body> 
+</html>
