@@ -1,38 +1,94 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<style>
-body{
-background: #e8e8e8;
+	<style>
+body {
+	background: #e8e8e8;
 }
+
+#colunanova {
+	background-color: white;
+}
+
+
 </style>
 </h:head>
 <h:body>
-<ui:include src="menu.xhtml" />
-<h:form>
-<p:dataTable var="car" value="#{CarroMB.gerarTabela()}">
-    <p:column headerText="Id" >
-        <h:outputText value="#{car.id}" />
-    </p:column>
- 
-    <p:column headerText="Marca" sortBy="#{CarroMB.carro.marca}">
-        <h:outputText value="#{car.marca}" />
-    </p:column>
- 
-    <p:column headerText="Modelo" sortBy="#{CarroMB.carro.modelo}">
-        <h:outputText value="#{car.modelo}" />
-    </p:column>
- 
-    <p:column headerText="Valor" sortBy="#{CarroMB.carro.valor}" >
-        <h:outputText value="#{CarroMB.carro.valor}" />
-    </p:column>
-</p:dataTable>
-</h:form>
+	<ui:include src="menu.xhtml" />
+		<p:growl id="growl" showDetail="true" sticky="true" />
 
-</h:body> 
+		<p:dataTable var="car" value="#{CarroMB.gerarTabela()}">
+		
+			<p:column headerText="Id">
+				<h:outputText value="#{car.id}" />
+			</p:column>
+
+			<p:column headerText="Marca">
+				<h:outputText value="#{car.marca}" />
+			</p:column>
+
+			<p:column headerText="Modelo">
+				<h:outputText value="#{car.modelo}" />
+			</p:column>
+
+			<p:column headerText="Valor">
+				<h:outputText value="#{car.valor}" />
+			</p:column>
+
+			<p:column headerText="Cor">
+				<h:outputText value="#{car.cor}" />
+			</p:column>
+
+			<p:column id="colunanova">
+
+ 			 	<p:commandButton id="btn" type="button" value="Editar" />
+
+ 		<p:overlayPanel id="imagePanel" for="btn" hideEffect="fade" appendToBody="false"  dynamic="true">
+	<h:form id="form">
+        			<p:inputText value="#{car.id}" />		
+<br/>
+					<p:column headerText="Marca">
+					<h:outputLabel>Marca: </h:outputLabel>
+						<p:inputText value="#{car.marca}"/>
+					</p:column>
+<br/>
+					<p:column headerText="Modelo">
+					<h:outputLabel>Modelo: </h:outputLabel>
+						<p:inputText value="#{car.modelo}" />
+					</p:column>
+<br/>
+					<p:column headerText="Valor">
+					<h:outputLabel>Valor: </h:outputLabel>
+						<p:inputText id="valor" value="#{CarroMB.carroDao.pegavalor}" />
+						<p:watermark for="valor" value="#{car.valor}" />  
+					</p:column>
+<br/>	
+					<p:column headerText="Ano">
+					<h:outputLabel>Ano: </h:outputLabel>
+						<p:inputText value="#{car.ano}" />
+					</p:column>
+<br/>		
+					<p:column headerText="Cor">
+
+					<h:outputLabel>Cor: </h:outputLabel>
+						<p:inputText value="#{car.cor}" />
+					</p:column>
+<br/>		
+
+				<p:commandButton process="form" value="Salvar" action="#{CarroMB.editar(car)}" update="growl" />
+</h:form>
+    </p:overlayPanel>  
+
+				<p:commandButton value="Excluir" action="#{CarroMB.apagar(car)}" />
+
+			</p:column>
+		</p:dataTable>
+
+
+</h:body>
 </html>

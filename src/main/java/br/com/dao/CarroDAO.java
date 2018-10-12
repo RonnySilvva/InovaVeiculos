@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
@@ -16,13 +17,38 @@ import br.com.model.Carro;
 
 @ManagedBean(name="CarroDaoMB")
 public class CarroDAO <obj>{
+	Carro carro = new Carro();
+	List<Carro> listcarros = new ArrayList <Carro>();
+	String pegavalor;
 	
-	CarroBean car;
 	
-    public void saveMessage() {
+	
+	public String getPegavalor() {
+		return pegavalor;
+	}
+
+	public void setPegavalor(String pegavalor) {
+		this.pegavalor = pegavalor;
+	}
+
+	public Carro getCarro() {
+		return carro;
+	}
+
+	public void setCarro(Carro carro) {
+		this.carro = carro;
+	}
+	
+	public void saveMessage() {
         FacesContext context = FacesContext.getCurrentInstance();
          
         context.addMessage(null, new FacesMessage("Successful",  "Foi gravado com sucesso ") );
+    }
+
+    public void editMessage() {
+        FacesContext context = FacesContext.getCurrentInstance();
+         
+        context.addMessage(null, new FacesMessage("Successful",  "Foi modificado com sucesso ") );
     }
     
 	@SuppressWarnings("unchecked")
@@ -34,13 +60,9 @@ public class CarroDAO <obj>{
 		session.beginTransaction();
 		//fim da conexão
 		
-		List<Carro> listcarros = new ArrayList <Carro>(); //cria a lsta com os atributos carros
+	 //cria a lsta com os atributos carros
 		listcarros = session.createQuery("from Carro").list(); //faz a query e lista
 		
-//		int tamanho = listcarros.size();	
-//		for(Carro carros : listcarros){
-//			System.out.println(carros.getId());
-//		}
 		session.close();
 		factory.close();
 		
@@ -66,7 +88,9 @@ public class CarroDAO <obj>{
 	}
 	
 	public void adicionarCarro(Carro car){
-
+		
+		
+		
 		car.setMarca(car.getMarca());
 		car.setModelo(car.getModelo());
 		car.setCor(car.getCor());
@@ -84,6 +108,45 @@ public class CarroDAO <obj>{
 		saveMessage();
 		session.getTransaction().commit();
 
+		session.close();
+		factory.close();
+
+	}
+	
+	public void apagarCarro(Carro car){
+		
+		SessionFactory factory = new Configuration().configure().buildSessionFactory();
+		Session session = factory.openSession();
+		session.beginTransaction();
+		
+		session.delete(car);
+		session.getTransaction().commit();
+		
+		session.close();
+		factory.close();
+	}
+	
+	public void editarCarro(Carro car){
+//		int index = listcarros.indexOf(car);
+//		
+//		
+//		listcarros.get(index).setValor(car.getValor());
+/*		String text = inputext.getValueChangeListener().toString();*/      
+
+		
+		car.getId();
+		car.setValor(pegavalor);
+
+		SessionFactory factory = new Configuration().configure().buildSessionFactory();
+		Session session = factory.openSession();
+		session.beginTransaction();
+		System.out.println("Id: " + car.getId() + " Valor: " + pegavalor);
+
+		
+		session.update(car);
+		editMessage();
+		session.getTransaction().commit();
+		
 		session.close();
 		factory.close();
 
